@@ -1,46 +1,95 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Alphabet Flashcards</title>
+  <title>A-Z Alphabet Flip Cards</title>
   <style>
-    body { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; font-family: sans-serif; background: #f0f0f0; }
+    body {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      background: #f0f0f0;
+      font-family: sans-serif;
+      padding: 20px;
+      gap: 12px;
+    }
     .card {
-      width: 100px; height: 120px; perspective: 600px;
+      width: 100px;
+      height: 120px;
+      perspective: 800px;
+      cursor: pointer;
     }
     .inner {
-      width: 100%; height: 100%;
-      transform-style: preserve-3d;
+      width: 100%;
+      height: 100%;
       transition: transform 0.6s;
+      transform-style: preserve-3d;
       position: relative;
     }
-    .card:hover .inner { transform: rotateY(180deg); }
-    .front, .back {
-      position: absolute; width: 100%; height: 100%;
-      display: flex; align-items: center; justify-content: center;
-      border: 1px solid #ccc; border-radius: 10px;
-      backface-visibility: hidden; background: white;
+    .card.flipped .inner {
+      transform: rotateY(180deg);
     }
-    .back { transform: rotateY(180deg); font-size: 14px; padding: 5px; text-align: center; }
+    .front, .back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 32px;
+      padding: 5px;
+    }
+    .back {
+      transform: rotateY(180deg);
+    }
+    .back img {
+      max-width: 90%;
+      max-height: 90%;
+    }
   </style>
 </head>
 <body>
 
 <script>
-  const data = {
-    A: "Apple", B: "Ball", C: "Cat", D: "Dog", E: "Elephant",
-    F: "Fish", G: "Goat", H: "Hat", I: "Ice cream", J: "Jug",
-    K: "Kite", L: "Lion", M: "Monkey", N: "Nest", O: "Owl",
-    P: "Pen", Q: "Queen", R: "Rabbit", S: "Sun", T: "Tiger",
-    U: "Umbrella", V: "Van", W: "Watch", X: "Xylophone", Y: "Yak", Z: "Zebra"
+  const alphabetData = {
+    A: "https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpg",
+    B: "https://upload.wikimedia.org/wikipedia/commons/7/7a/Basketball.png",
+    C: "https://upload.wikimedia.org/wikipedia/commons/3/3a/Cat03.jpg",
+    D: "https://upload.wikimedia.org/wikipedia/commons/d/d9/Collage_of_Nine_Dogs.jpg",
+    E: "https://upload.wikimedia.org/wikipedia/commons/3/37/African_Bush_Elephant.jpg",
+    F: "https://upload.wikimedia.org/wikipedia/commons/1/19/Goldfish3.jpg",
+    G: "https://upload.wikimedia.org/wikipedia/commons/0/05/Goat_on_field.jpg",
+    H: "https://upload.wikimedia.org/wikipedia/commons/5/5e/Baseball_cap.jpg",
+    I: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Vanilla_Ice_Cream_Cone.jpg",
+    J: "https://upload.wikimedia.org/wikipedia/commons/f/fb/Juice_Glass.jpg",
+    K: "https://upload.wikimedia.org/wikipedia/commons/e/e3/Kite_beach_kid.jpg",
+    L: "https://upload.wikimedia.org/wikipedia/commons/7/73/Lion_waiting_in_Namibia.jpg",
+    M: "https://upload.wikimedia.org/wikipedia/commons/3/3a/Brown_Monkey.jpg",
+    N: "https://upload.wikimedia.org/wikipedia/commons/3/32/Nest_with_eggs.jpg",
+    O: "https://upload.wikimedia.org/wikipedia/commons/9/9f/Owl_in_tree.jpg",
+    P: "https://upload.wikimedia.org/wikipedia/commons/6/66/Colorful_Pencil.jpg",
+    Q: "https://upload.wikimedia.org/wikipedia/commons/7/71/Queen_Elizabeth_II_1959.jpg",
+    R: "https://upload.wikimedia.org/wikipedia/commons/1/11/Rabbit_in_meadow.jpg",
+    S: "https://upload.wikimedia.org/wikipedia/commons/e/e3/Sun_symbol.svg",
+    T: "https://upload.wikimedia.org/wikipedia/commons/f/fd/Bengal_tiger.jpg",
+    U: "https://upload.wikimedia.org/wikipedia/commons/c/c7/Red_umbrella.jpg",
+    V: "https://upload.wikimedia.org/wikipedia/commons/5/5b/Campervan.jpg",
+    W: "https://upload.wikimedia.org/wikipedia/commons/f/f7/Wrist_watch.jpg",
+    X: "https://upload.wikimedia.org/wikipedia/commons/0/03/Xylophone.jpg",
+    Y: "https://upload.wikimedia.org/wikipedia/commons/1/13/Yak_in_Ladakh.jpg",
+    Z: "https://upload.wikimedia.org/wikipedia/commons/e/e2/Zebra_Botswana_edit02.jpg"
   };
 
-  for (let letter in data) {
+  for (let letter in alphabetData) {
     document.write(`
-      <div class="card">
+      <div class="card" onclick="this.classList.toggle('flipped')">
         <div class="inner">
           <div class="front">${letter}</div>
-          <div class="back">${data[letter]}</div>
+          <div class="back"><img src="${alphabetData[letter]}" alt="${letter} image"></div>
         </div>
       </div>
     `);
